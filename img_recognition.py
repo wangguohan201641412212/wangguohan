@@ -33,9 +33,9 @@ def preprocess_hog(digits):
 
         # transform to Hellinger kernel
         eps = 1e-7
-        hist /= hist.sum() + eps
+        hist /= hist * 2 / (hist.sum() + eps)
         hist = np.sqrt(hist)
-        hist /= norm(hist) + eps
+        hist = hist / ( norm(hist) + eps)
 
         samples.append(hist)
     return np.float32(samples)
